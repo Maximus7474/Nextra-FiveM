@@ -1,0 +1,43 @@
+---
+title: Server.cfg
+description: Guide on specifics for the Server CFG
+---
+
+import { Steps } from 'nextra-theme-docs';
+import { Callout } from 'nextra/components';
+import LinkButton from 'components/link_button.tsx'
+import { Table, Td, Th, Tr } from 'nextra/components'
+
+# Setting up your server
+
+This guide will go over some of the key elements of the <LinkButton text={"server.cfg"} image={"https://docs.fivem.net/docs/server-manual/setting-up-a-server-vanilla/#servercfg"}/>.
+
+## Server Banner
+
+In your server cfg you can define your connection banner, any image size will work but if you're looking to taylor your banner to have the best ratio we suggest using <code>1865 x 108</code>.
+```bash
+sets banner_detail "https://url.to/image.png"
+sets banner_connecting "https://url.to/image.png"
+```
+
+## Locale identifier
+
+Each server is localized in a country/region, this is done with the following convar:
+```bash
+sets locale "root-AQ"
+```
+Here a couple of common locales:
+ 
+| Region        | Region Code      |
+| ------------- | ---------------- |
+| America       |<code>en-US</code>|
+| Canada        |<code>fr-CA</code>|
+| France        |<code>fr-FR</code>|
+| Netherlands   |<code>nl-NL</code>|
+| Brasil        |<code>pt-BR</code>|
+| Britain       |<code>en-GB</code>|
+
+<Callout type="info">
+You can find more locale codes <LinkButton text={"here"} image={"https://simplelocalize.io/data/locales/"}/>
+*Please note that some might not work*
+</Callout>
