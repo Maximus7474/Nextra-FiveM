@@ -3,10 +3,9 @@ title: Server.cfg
 description: Guide on specifics for the Server CFG
 ---
 
-import { Steps } from 'nextra-theme-docs';
 import { Callout } from 'nextra/components';
 import LinkButton from 'components/link_button.tsx'
-import { Table, Td, Th, Tr } from 'nextra/components'
+import { FileTree } from 'nextra/components'
 
 # Setting up your server
 
@@ -41,3 +40,37 @@ Here a couple of common locales:
 You can find more locale codes <LinkButton text={"here"} image={"https://simplelocalize.io/data/locales/"}/>
 *Please note that some might not work*
 </Callout>
+
+## Resource Start Handling
+
+Your <code>server.cfg</code> will have an entire section which will define the start order for all your resources.
+Please note that there are certain particularities with this that need to be taken into account.
+
+### Start or Ensure ?
+
+Choose the use of these words wisely, incorrectly using these can break resources requiring others to be running.
+- **ensure**: this will start or restart a resource
+    - Good for development, as no matter the situation it'll start or restart the resource without hassle
+    - Bad for using to start all resources. You might end up restarting a major resource which will break links and scripts.
+
+- **start**: this will only start a resource, if it's already started it'll ignore it.
+    - Good for starting all your resources, it'll avoid restarting scripts when starting a resource folder (See Resource Organization below)
+    - Bad for development, if your resource is started, it'll ignore the request.
+
+### Resource Organization
+You can group multiple resources in one "sub-folder" inside your <code>resources/</code> folder.
+To do so create a new folder and place square brackets around the name as such: `[foo-bar]`, now all resources listed in this section will be usable.
+
+Here's a file tree that will work:
+<FileTree>
+  <FileTree.Folder name="resources" defaultOpen>
+    <FileTree.File name="spawnmanager" />
+    <FileTree.File name="baseevents" />
+    <FileTree.Folder name="[test]" defaultOpen>
+      <FileTree.File name="example-loadscreen" />
+      <FileTree.File name="fivem" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+You can start `example-loadscreen` and `fivem` together by adding `start [test]` in your server cfg.
